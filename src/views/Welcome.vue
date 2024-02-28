@@ -1,16 +1,34 @@
 <template>
   <div class="welcome container">
-    <Signup />
-    <Login />
+    <div v-if="showLoginForm">
+      <Login />
+      <p>
+        Not a number?
+        <span @click="showLoginForm = !showLoginForm">Create Account</span>
+      </p>
+    </div>
+    <div v-else>
+      <Signup />
+      <p>
+        Already member?
+        <span @click="showLoginForm = !showLoginForm">Login Account</span>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
 import Signup from "../components/Signup.vue";
 import Login from "../components/Login.vue";
+import { ref } from "vue";
 
 export default {
   components: { Signup, Login },
+  setup() {
+    let showLoginForm = ref(true);
+
+    return { showLoginForm };
+  },
 };
 </script>
 
